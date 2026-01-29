@@ -1,0 +1,6 @@
+# Spring Boot AutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=
+com.wbw.nacos.autoconfigure.NacosDiscoveryAutoConfiguration,
+com.wbw.nacos.autoconfigure.NacosConfigAutoConfiguration,
+com.wbw.nacos.autoconfigure.NacosHealthAutoConfiguration,
+com.wbw.nacos.autoconfigure.NacosFaultToleranceAutoConfiguration

@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.wbw.redis.config.RedisConfig,\
+  com.wbw.redis.config.RedisSerializerConfig

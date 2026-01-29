@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/wbw-frame-cloud/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-frame-common/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-frame-config/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-frame-core/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-frame-data/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-frame-launch/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-frame-mq/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-frame-mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-frame-redis/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-frame-rocketmq/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-frame-security/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-frame-sequence/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-frame-starter/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-frame-web/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-frme-sercurity/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-openfeign/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-rocketmq/pom.xml" />
+        <option value="$PROJECT_DIR$/wbw-sharding/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

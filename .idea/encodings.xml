@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-cloud/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-cloud/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-config/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-config/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-data/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-data/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-launch/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-launch/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-mq/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-mq/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-mybatis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-mybatis/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-redis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-redis/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-rocketmq/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-rocketmq/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-security/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-sequence/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-sequence/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-starter/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frame-web/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frme-sercurity/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-frme-sercurity/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-mybatis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-mybatis/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-nacos/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-nacos/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-openfeign/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-openfeign/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-redis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-redis/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-rocketmq/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-rocketmq/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-security/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-sharding/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-sharding/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-starter/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wbw-web/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

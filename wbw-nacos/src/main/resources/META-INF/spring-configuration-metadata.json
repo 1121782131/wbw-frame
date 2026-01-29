@@ -1,0 +1,91 @@
+{
+  "groups": [
+    {
+      "name": "nacos",
+      "type": "com.wbw.nacos.property.NacosDiscoveryProperties",
+      "sourceType": "com.wbw.nacos.property.NacosDiscoveryProperties"
+    },
+    {
+      "name": "nacos.config",
+      "type": "com.wbw.nacos.property.NacosConfigProperties",
+      "sourceType": "com.wbw.nacos.property.NacosConfigProperties"
+    },
+    {
+      "name": "nacos.health",
+      "type": "com.wbw.nacos.health.NacosHealthConfig",
+      "sourceType": "com.wbw.nacos.health.NacosHealthConfig"
+    },
+    {
+      "name": "nacos.fault-tolerance",
+      "type": "com.wbw.nacos.config.NacosFaultToleranceConfig",
+      "sourceType": "com.wbw.nacos.config.NacosFaultToleranceConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "nacos.discovery.server-addr",
+      "type": "java.lang.String",
+      "description": "Nacos服务地址",
+      "defaultValue": "localhost:8848"
+    },
+    {
+      "name": "nacos.discovery.namespace",
+      "type": "java.lang.String",
+      "description": "命名空间",
+      "defaultValue": ""
+    },
+    {
+      "name": "nacos.discovery.service",
+      "type": "java.lang.String",
+      "description": "服务名"
+    },
+    {
+      "name": "nacos.discovery.group",
+      "type": "java.lang.String",
+      "description": "分组",
+      "defaultValue": "DEFAULT_GROUP"
+    },
+    {
+      "name": "nacos.config.server-addr",
+      "type": "java.lang.String",
+      "description": "Nacos服务地址",
+      "defaultValue": "localhost:8848"
+    },
+    {
+      "name": "nacos.config.namespace",
+      "type": "java.lang.String",
+      "description": "命名空间",
+      "defaultValue": ""
+    },
+    {
+      "name": "nacos.config.group",
+      "type": "java.lang.String",
+      "description": "分组",
+      "defaultValue": "DEFAULT_GROUP"
+    },
+    {
+      "name": "nacos.config.data-id",
+      "type": "java.lang.String",
+      "description": "数据ID"
+    },
+    {
+      "name": "nacos.config.file-extension",
+      "type": "java.lang.String",
+      "description": "配置文件类型",
+      "defaultValue": "yml"
+    },
+    {
+      "name": "nacos.health.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用Nacos健康检查",
+      "defaultValue": true
+    },
+    {
+      "name": "nacos.fault-tolerance.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用容错处理",
+      "defaultValue": true
+    }
+  ],
+  "hints": []
+}

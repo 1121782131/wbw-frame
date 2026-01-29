@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- MyBatis SQL日志 -->
+    <logger name="com.wbw.mybatis" level="INFO"/>
+
+    <!-- MyBatis SQL执行日志 -->
+    <logger name="com.baomidou.mybatisplus" level="WARN"/>
+
+    <!-- 数据源日志 -->
+    <logger name="com.baomidou.dynamic.datasource" level="WARN"/>
+</configuration>
