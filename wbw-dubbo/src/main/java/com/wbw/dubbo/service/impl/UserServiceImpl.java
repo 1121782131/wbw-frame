@@ -1,50 +1,83 @@
 package com.wbw.dubbo.service.impl;
 
 import com.wbw.dubbo.service.UserService;
+import com.wbw.dubbo.transaction.OrderService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 用户服务实现类
+ * 用户服务实现
  */
 @DubboService(interfaceClass = UserService.class, version = "1.0.0", group = "wbw")
 public class UserServiceImpl implements UserService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    // 模拟数据库
+    private static final ConcurrentHashMap<Long, String> USERS = new ConcurrentHashMap<>();
+    private static long nextId = 1;
+
+    @Autowired
+    private OrderService orderService;
 
     @Override
     public String getUserById(Long id) {
-        logger.info("获取用户信息，ID: {}", id);
-        // 模拟数据库查询
-        return "User{id=" + id + ", name=\"test_user\", age=25}";
+        return USERS.get(id);
     }
 
     @Override
     public Boolean createUser(String userInfo) {
-        logger.info("创建用户，信息: {}", userInfo);
-        // 模拟数据库插入
+        Long id = nextId++;
+        USERS.put(id, userInfo);
         return true;
     }
 
     @Override
     public Boolean updateUser(Long id, String userInfo) {
-        logger.info("更新用户，ID: {}, 信息: {}", id, userInfo);
-        // 模拟数据库更新
-        return true;
+        if (USERS.containsKey(id)) {
+            USERS.put(id, userInfo);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public Boolean deleteUser(Long id) {
-        logger.info("删除用户，ID: {}", id);
-        // 模拟数据库删除
-        return true;
+        return USERS.remove(id) != null;
     }
 
     @Override
     public String testService(String message) {
-        logger.info("测试服务，消息: {}", message);
-        // 模拟服务处理
-        return "服务响应: " + message;
+        return "Hello, " + message;
+    }
+
+    @Override
+    @GlobalTransactional
+    public void createUserAndOrder(String username, double amount) {
+        System.out.println("创建用户：" + username);
+        // 创建用户
+        Long id = nextId++;
+        USERS.put(id, username);
+        
+        // 创建订单
+        System.out.println("创建订单：" + username + " - " + amount);
+        orderService.createOrder(username, amount);
+        
+        // 模拟异常
+        throw new RuntimeException("测试事务回滚");
+    }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return USERS.containsValue(username);
+    }
+
+    /**
+     * 清空所有用户（用于测试）
+     */
+    public void clearAll() {
+        USERS.clear();
+        nextId = 1;
     }
 }

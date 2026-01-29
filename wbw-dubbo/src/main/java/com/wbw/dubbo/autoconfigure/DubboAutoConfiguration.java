@@ -32,7 +32,6 @@ public class DubboAutoConfiguration {
     public ApplicationConfig applicationConfig() {
         ApplicationConfig applicationConfig = new ApplicationConfig();
         applicationConfig.setName(dubboProperties.getApplication().getName());
-        applicationConfig.setModule(dubboProperties.getApplication().getModule());
         applicationConfig.setVersion(dubboProperties.getApplication().getVersion());
         applicationConfig.setOrganization(dubboProperties.getApplication().getOrganization());
         applicationConfig.setEnvironment(dubboProperties.getApplication().getEnvironment());
@@ -54,7 +53,6 @@ public class DubboAutoConfiguration {
         registryConfig.setTimeout((int) dubboProperties.getRegistry().getTimeout().toMillis());
         registryConfig.setCluster(dubboProperties.getRegistry().getCluster());
         registryConfig.setGroup(dubboProperties.getRegistry().getGroup());
-        registryConfig.setNamespace(dubboProperties.getRegistry().getNamespace());
         registryConfig.setParameters(dubboProperties.getRegistry().getParameters());
         return registryConfig;
     }
@@ -73,9 +71,6 @@ public class DubboAutoConfiguration {
         protocolConfig.setThreads(dubboProperties.getProtocol().getThreads());
         protocolConfig.setQueues(dubboProperties.getProtocol().getQueues());
         protocolConfig.setSerialization(dubboProperties.getProtocol().getSerialization());
-        protocolConfig.setTimeout((int) dubboProperties.getProtocol().getTimeout().toMillis());
-        protocolConfig.setConnections(dubboProperties.getProtocol().getConnections());
-        protocolConfig.setWeight(dubboProperties.getProtocol().getWeight());
         protocolConfig.setParameters(dubboProperties.getProtocol().getParameters());
         return protocolConfig;
     }
@@ -94,6 +89,7 @@ public class DubboAutoConfiguration {
         providerConfig.setWeight(dubboProperties.getProvider().getWeight());
         providerConfig.setGroup(dubboProperties.getProvider().getGroup());
         providerConfig.setVersion(dubboProperties.getProvider().getVersion());
+        providerConfig.setFilter("transactionContextFilter");
         providerConfig.setParameters(dubboProperties.getProvider().getParameters());
         return providerConfig;
     }
@@ -113,6 +109,7 @@ public class DubboAutoConfiguration {
         consumerConfig.setVersion(dubboProperties.getConsumer().getVersion());
         consumerConfig.setCheck(dubboProperties.getConsumer().getCheck());
         consumerConfig.setAsync(dubboProperties.getConsumer().getAsync());
+        consumerConfig.setFilter("transactionContextFilter");
         consumerConfig.setParameters(dubboProperties.getConsumer().getParameters());
         return consumerConfig;
     }

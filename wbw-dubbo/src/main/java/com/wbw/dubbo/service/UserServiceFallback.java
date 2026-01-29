@@ -39,4 +39,16 @@ public class UserServiceFallback implements UserService {
         logger.warn("用户服务降级，返回默认测试结果，消息: {}", message);
         return "服务降级响应: " + message;
     }
+
+    @Override
+    public void createUserAndOrder(String username, double amount) {
+        logger.warn("用户服务降级，返回默认创建用户和订单结果，用户名: {}, 金额: {}", username, amount);
+        throw new RuntimeException("服务降级: 无法创建用户和订单");
+    }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        logger.warn("用户服务降级，返回默认检查用户存在结果，用户名: {}", username);
+        return false;
+    }
 }

@@ -15,7 +15,7 @@ public interface UserService {
     /**
      * 创建用户
      * @param userInfo 用户信息
-     * @return 创建结果
+     * @return 是否成功
      */
     Boolean createUser(String userInfo);
 
@@ -23,14 +23,14 @@ public interface UserService {
      * 更新用户
      * @param id 用户ID
      * @param userInfo 用户信息
-     * @return 更新结果
+     * @return 是否成功
      */
     Boolean updateUser(Long id, String userInfo);
 
     /**
      * 删除用户
      * @param id 用户ID
-     * @return 删除结果
+     * @return 是否成功
      */
     Boolean deleteUser(Long id);
 
@@ -40,4 +40,18 @@ public interface UserService {
      * @return 测试结果
      */
     String testService(String message);
+
+    /**
+     * 创建用户和订单（用于测试事务回滚）
+     * @param username 用户名
+     * @param amount 金额
+     */
+    void createUserAndOrder(String username, double amount);
+
+    /**
+     * 根据用户名检查用户是否存在
+     * @param username 用户名
+     * @return 是否存在
+     */
+    boolean existsByUsername(String username);
 }
