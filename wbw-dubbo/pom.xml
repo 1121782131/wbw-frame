@@ -21,6 +21,10 @@
             <groupId>com.wbw</groupId>
             <artifactId>wbw-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.wbw</groupId>
+            <artifactId>wbw-security</artifactId>
+        </dependency>
 
         <!-- Dubbo -->
         <dependency>
@@ -42,7 +46,6 @@
         <dependency>
             <groupId>io.seata</groupId>
             <artifactId>seata-spring-boot-starter</artifactId>
-            <version>1.7.0</version>
         </dependency>
 
         <!-- 测试依赖 -->

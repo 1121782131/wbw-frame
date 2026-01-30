@@ -17,4 +17,40 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <!-- 核心依赖 -->
+        <dependency>
+            <groupId>com.wbw</groupId>
+            <artifactId>wbw-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.wbw</groupId>
+            <artifactId>wbw-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.wbw</groupId>
+            <artifactId>wbw-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.wbw</groupId>
+            <artifactId>wbw-mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.wbw</groupId>
+            <artifactId>wbw-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.wbw</groupId>
+            <artifactId>wbw-nacos</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.wbw</groupId>
+            <artifactId>wbw-rocketmq</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.wbw</groupId>
+            <artifactId>wbw-dubbo</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.time.Duration;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -39,9 +40,9 @@ public class RocketMQStressTest {
         MockitoAnnotations.openMocks(this);
         when(rocketMQProperties.getProducer()).thenReturn(producerProperties);
         when(producerProperties.getSendMessageTimeout()).thenReturn(3000);
-        when(rocketMQTemplate.syncSend(anyString(), any())).thenReturn(mock(SendResult.class));
-        when(rocketMQTemplate.syncSend(anyString(), any(), anyLong())).thenReturn(mock(SendResult.class));
-        when(rocketMQTemplate.syncSend(anyString(), any(), anyLong(), anyInt())).thenReturn(mock(SendResult.class));
+        when(rocketMQTemplate.syncSend(anyString(), any(String.class))).thenReturn(mock(SendResult.class));
+        when(rocketMQTemplate.syncSend(anyString(), any(String.class), anyLong())).thenReturn(mock(SendResult.class));
+        when(rocketMQTemplate.syncSend(anyString(), any(org.springframework.messaging.Message.class), anyLong(), anyInt())).thenReturn(mock(SendResult.class));
         
         rocketMQProducerService = new RocketMQProducerService(rocketMQTemplate, rocketMQProperties);
     }
@@ -141,7 +142,8 @@ public class RocketMQStressTest {
                     try {
                         String topic = "stress-test-topic";
                         String message = "Stress test message with timeout from thread " + threadId + ", message " + j;
-                        rocketMQProducerService.send(topic, message, java.time.Duration.ofSeconds(5));
+                        Duration timeout = java.time.Duration.ofSeconds(5);
+                        rocketMQProducerService.sendWithTimeout(topic, message, timeout);
                         successCount.incrementAndGet();
                     } catch (Exception e) {
                         failureCount.incrementAndGet();

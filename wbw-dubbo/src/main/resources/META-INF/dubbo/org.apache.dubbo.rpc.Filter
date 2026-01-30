@@ -1,1 +1,2 @@
 transactionContextFilter=com.wbw.dubbo.transaction.TransactionContextFilter
+jwtDubboContextFilter=com.wbw.dubbo.filter.JwtDubboContextFilter

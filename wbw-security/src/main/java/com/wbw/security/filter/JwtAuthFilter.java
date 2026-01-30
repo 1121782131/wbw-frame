@@ -2,7 +2,7 @@
 package com.wbw.security.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wbw.security.annotation.Anonymous;
+import com.wbw.security.annotation.Whitelist;
 import com.wbw.security.config.JwtProperties;
 import com.wbw.security.context.JwtSecurityContext;
 import com.wbw.security.model.JwtUser;
@@ -97,23 +97,30 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String requestUri = request.getRequestURI();
         for (String pattern : jwtProperties.getWhiteList()) {
             if (matchesPattern(requestUri, pattern)) {
+                log.debug("请求路径在白名单中: {}", requestUri);
                 return true;
             }
         }
         
         // 检查是否是静态资源
         if (requestUri.matches(".*\\.(html|css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf)$")) {
+            log.debug("静态资源请求: {}", requestUri);
             return true;
         }
         
-        // 检查是否有@Anonymous注解
-        return hasAnonymousAnnotation(request);
+        // 检查是否有@Whitelist注解
+        if (hasWhitelistAnnotation(request)) {
+            log.debug("请求方法有@Whitelist注解: {}", request.getRequestURI());
+            return true;
+        }
+        
+        return false;
     }
     
     /**
-     * 检查是否有@Anonymous注解
+     * 检查是否有@Whitelist注解
      */
-    private boolean hasAnonymousAnnotation(HttpServletRequest request) {
+    private boolean hasWhitelistAnnotation(HttpServletRequest request) {
         try {
             for (HandlerMapping handlerMapping : handlerMappings) {
                 HandlerExecutionChain handlerChain = handlerMapping.getHandler(request);
@@ -121,12 +128,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     HandlerMethod handlerMethod = (HandlerMethod) handlerChain.getHandler();
                     
                     // 检查方法注解
-                    if (handlerMethod.getMethod().isAnnotationPresent(Anonymous.class)) {
+                    if (handlerMethod.getMethod().isAnnotationPresent(Whitelist.class)) {
                         return true;
                     }
                     
                     // 检查类注解
-                    if (handlerMethod.getBeanType().isAnnotationPresent(Anonymous.class)) {
+                    if (handlerMethod.getBeanType().isAnnotationPresent(Whitelist.class)) {
                         return true;
                     }
                 }

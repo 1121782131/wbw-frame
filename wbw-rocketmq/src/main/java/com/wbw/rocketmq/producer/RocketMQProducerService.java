@@ -67,7 +67,7 @@ public class RocketMQProducerService {
      * @param <T> 消息类型
      * @return 发送结果
      */
-    public <T> SendResult send(String topic, T message, Duration timeout) {
+    public <T> SendResult sendWithTimeout(String topic, T message, Duration timeout) {
         log.info("Sending synchronous message to topic: {} with timeout: {}", topic, timeout);
         long timeoutMillis = timeout.toMillis();
         SendResult sendResult = rocketMQTemplate.syncSend(topic, message, timeoutMillis);

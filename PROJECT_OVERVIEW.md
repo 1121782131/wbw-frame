@@ -2,691 +2,479 @@
 
 ## 1. 项目概述
 
-本项目是一个企业级微服务框架，基于 Spring Boot 3.2.0 和 Spring Cloud 2023.0.0 构建，提供了一套完整的微服务开发解决方案。框架集成了多种主流中间件和工具，旨在简化企业级应用的开发、部署和管理过程，提高开发效率和系统稳定性。
+### 1.1 项目简介
+企业级微服务框架（wbw-frame）是一个基于 Spring Boot 3.2.5 和 Spring Cloud 2023.0.1 的综合性微服务开发框架，旨在为企业级应用提供完整的微服务基础设施和开发工具链。
 
-## 2. 核心功能
+### 1.2 核心功能
 
-- **通用工具**：提供了丰富的常量定义、异常处理、结果封装和工具类
-- **服务调用**：基于 Dubbo 实现的高性能服务调用框架
-- **数据访问**：集成 MyBatis Plus 实现的 ORM 框架，支持动态数据源
-- **服务发现与配置**：基于 Nacos 实现的服务注册、发现和配置中心
-- **缓存**：集成 Redis 实现的缓存解决方案
-- **消息队列**：基于 RocketMQ 实现的消息队列解决方案
-- **安全认证**：基于 JWT 实现的安全认证框架
-- **Web 功能**：集成 Spring Web 和 OpenAPI 文档
+| 功能模块 | 主要功能 | 技术实现 |
+|---------|---------|----------|
+| 公共模块 (wbw-common) | 统一返回结构、异常体系、工具类库 | Java 核心库 + 第三方工具 |
+| 安全模块 (wbw-security) | JWT 认证、Token 管理、安全上下文 | Spring Security + JJWT |
+| Web 模块 (wbw-web) | API 文档、全局异常处理、参数验证 | Spring MVC + SpringDoc |
+| 数据模块 (wbw-mybatis) | 动态数据源、MyBatis Plus 集成 | MyBatis Plus + AOP |
+| 缓存模块 (wbw-redis) | Redis 客户端封装、分布式锁 | Jedis + Lettuce |
+| 服务治理 (wbw-nacos) | 服务发现、配置管理、健康检查 | Nacos 客户端 |
+| 消息模块 (wbw-rocketmq) | 消息生产者、消费者封装 | RocketMQ Spring Boot Starter |
+| RPC 模块 (wbw-dubbo) | 服务调用、过滤器、事务 | Dubbo 3.3.0 |
+| 框架入口 (wbw-starter) | 自动配置、依赖管理 | Spring Boot 自动配置 |
 
-## 3. 技术架构
+### 1.3 技术栈
+- **基础框架**：Spring Boot 3.2.5、Spring Cloud 2023.0.1、Spring Cloud Alibaba 2023.0.1.0
+- **数据访问**：MyBatis Plus 3.5.6、ShardingSphere 5.4.2
+- **消息队列**：RocketMQ 2.3.4
+- **RPC 框架**：Dubbo 3.3.0
+- **API 文档**：SpringDoc 2.3.0
+- **安全认证**：JJWT 0.12.5
+- **缓存**：Redis 5.1.0
+- **服务治理**：Nacos 2023.0.1.0
+- **工具库**：Lombok 1.18.32、Hutool 5.8.25、Guava 33.0.0-jre
 
-### 3.1 技术栈
+## 2. 使用指南
 
-- **基础框架**：Spring Boot 3.2.0, Spring Cloud 2023.0.0, Spring Cloud Alibaba 2023.0.1.0
-- **服务调用**：Dubbo 3.2.0
-- **服务发现与配置**：Nacos
-- **数据访问**：MyBatis Plus 3.5.5
-- **缓存**：Redis
-- **消息队列**：RocketMQ
-- **安全认证**：JWT
-- **开发语言**：Java 17
+### 2.1 环境要求
+- **JDK**：Java 17 或更高版本
+- **Maven**：Maven 3.8.0 或更高版本
+- **IDE**：IntelliJ IDEA 2023.0 或更高版本（推荐）
+- **操作系统**：Windows、Linux、macOS
 
-### 3.2 模块结构
+### 2.2 安装步骤
 
+#### 2.2.1 克隆项目
+```bash
+git clone <项目地址>
+cd wbw-frame
 ```
-wbw-frame/
-├── wbw-common/         # 通用工具模块
-├── wbw-dubbo/          # Dubbo服务调用模块
-├── wbw-mybatis/        # MyBatis数据访问模块
-├── wbw-nacos/          # Nacos服务发现与配置模块
-├── wbw-redis/          # Redis缓存模块
-├── wbw-rocketmq/       # RocketMQ消息队列模块
-├── wbw-security/       # 安全认证模块
-├── wbw-starter/        # 启动器模块
-├── wbw-web/            # Web模块
-└── pom.xml             # 项目依赖管理
+
+#### 2.2.2 构建项目
+```bash
+mvn clean install -DskipTests
 ```
 
-## 4. 适用场景
+#### 2.2.3 在微服务项目中引入
+在微服务项目的 `pom.xml` 文件中添加以下依赖：
 
-- **企业级微服务应用**：适用于构建大型、分布式的企业级应用
-- **高并发场景**：通过优化的线程池配置和缓存机制，支持高并发访问
-- **复杂业务系统**：提供了完整的业务支撑能力，适用于复杂业务逻辑的实现
-- **快速开发**：集成了多种常用组件，简化开发流程，提高开发效率
-
-## 5. 整体安装指南
-
-### 5.1 环境要求
-
-- JDK 17+
-- Maven 3.6+
-- Nacos Server 2.0+
-- Redis Server 6.0+
-- RocketMQ 4.9+
-
-### 5.2 安装步骤
-
-1. **克隆项目**
-   ```bash
-   git clone https://gitee.com/wang0306/frame.git
-   cd frame
-   ```
-
-2. **编译打包**
-   ```bash
-   mvn clean install -DskipTests
-   ```
-
-3. **配置依赖**
-   在您的项目中添加以下依赖：
-   ```xml
-   <dependency>
-       <groupId>com.wbw</groupId>
-       <artifactId>wbw-starter</artifactId>
-       <version>1.0.0</version>
-   </dependency>
-   ```
-
-4. **配置文件**
-   根据您的环境配置 `application.yml` 文件，参考各模块的详细配置说明。
-
-## 6. 各模块详细使用说明
-
-### 6.1 wbw-common 通用工具模块
-
-#### 6.1.1 安装步骤
-
-在项目的 `pom.xml` 文件中添加依赖：
 ```xml
 <dependency>
     <groupId>com.wbw</groupId>
-    <artifactId>wbw-common</artifactId>
+    <artifactId>wbw-starter</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
 
-#### 6.1.2 核心功能
+### 2.3 基本操作流程
 
-- **常量定义**：提供了业务常量、通用常量和Redis常量
-- **异常处理**：定义了多种业务异常类型
-- **结果封装**：提供了统一的响应结果封装
-- **工具类**：提供了日期、JSON、数字、字符串等常用工具类
+#### 2.3.1 创建微服务项目
+1. 使用 Spring Initializr 创建一个新的 Spring Boot 项目
+2. 在 `pom.xml` 中添加框架依赖
+3. 配置必要的环境变量和配置文件
 
-#### 6.1.3 使用示例
-
-**1. 响应结果使用**
-```java
-import com.wbw.common.result.Result;
-
-// 成功响应
-return Result.success("操作成功");
-
-// 带数据的成功响应
-return Result.success("操作成功", data);
-
-// 失败响应
-return Result.fail("操作失败");
-
-// 分页响应
-return Result.success(PageResult.of(list, total, page, size));
+#### 2.3.2 启动服务
+```bash
+mvn spring-boot:run
 ```
 
-**2. 异常使用**
-```java
-import com.wbw.common.exception.BusinessException;
-
-// 抛出业务异常
-if (condition) {
-    throw new BusinessException("业务逻辑错误");
-}
+#### 2.3.3 访问 API 文档
+启动服务后，可通过以下地址访问 API 文档：
+```
+http://localhost:8080/swagger-ui.html
 ```
 
-**3. 工具类使用**
-```java
-import com.wbw.common.utils.date.FrameDateUtil;
-import com.wbw.common.utils.json.JsonUtil;
+## 3. 配置说明
 
-// 日期工具
-String dateStr = FrameDateUtil.formatDate(new Date());
+### 3.1 核心配置项
 
-// JSON工具
-String jsonStr = JsonUtil.toJson(data);
-Object obj = JsonUtil.parseObject(jsonStr, Object.class);
-```
+#### 3.1.1 框架基础配置
 
-### 6.2 wbw-dubbo Dubbo服务调用模块
+| 配置项 | 默认值 | 说明 | 使用场景 |
+|-------|-------|------|----------|
+| wbw.framework.enabled | true | 是否启用框架 | 全局开关，可用于临时禁用框架功能 |
+| wbw.framework.application-name | ${spring.application.name} | 应用名称 | 用于日志、监控等标识 |
+| wbw.framework.environment | ${spring.profiles.active} | 环境标识 | 用于区分不同环境的配置 |
 
-#### 6.2.1 安装步骤
+#### 3.1.2 安全模块配置
 
-在项目的 `pom.xml` 文件中添加依赖：
-```xml
-<dependency>
-    <groupId>com.wbw</groupId>
-    <artifactId>wbw-dubbo</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
+| 配置项 | 默认值 | 说明 | 使用场景 |
+|-------|-------|------|----------|
+| wbw.framework.security.enabled | true | 是否启用安全模块 | 控制 JWT 认证功能 |
+| wbw.framework.security.jwt-secret | 随机生成 | JWT 密钥 | 用于 Token 签名和验证 |
+| wbw.framework.security.token-expiration | 3600000 | Token 过期时间（毫秒） | 控制 Token 有效期 |
+| wbw.framework.security.token-issuer | wbw-framework | Token 签发者 | 用于 Token 标识 |
 
-#### 6.2.2 配置文件
+#### 3.1.3 Web 模块配置
 
-在 `application.yml` 文件中添加Dubbo配置：
-```yaml
-dubbo:
-  application:
-    name: your-application-name
-  registry:
-    address: nacos://localhost:8848
-  protocol:
-    name: dubbo
-    port: 20880
-  provider:
-    timeout: 10s
-    retries: 0
-  consumer:
-    timeout: 10s
-    retries: 0
-    check: false
-```
+| 配置项 | 默认值 | 说明 | 使用场景 |
+|-------|-------|------|----------|
+| wbw.framework.web.open-api-enabled | true | 是否启用 OpenAPI | 控制 API 文档生成 |
+| wbw.framework.web.api-prefix | /api | API 路径前缀 | 统一 API 路径格式 |
+| wbw.framework.web.cors-enabled | true | 是否启用 CORS | 跨域请求支持 |
+| wbw.framework.web.cors-allowed-origins | * | 允许的跨域来源 | 跨域请求配置 |
 
-#### 6.2.3 使用示例
+#### 3.1.4 数据模块配置
 
-**1. 定义服务接口**
-```java
-public interface UserService {
-    String getUserById(Long id);
-    Boolean createUser(String userInfo);
-}
-```
+| 配置项 | 默认值 | 说明 | 使用场景 |
+|-------|-------|------|----------|
+| wbw.framework.mybatis.enabled | true | 是否启用 MyBatis | 控制数据访问功能 |
+| wbw.framework.mybatis.mapper-locations | classpath:mapper/**/*.xml | Mapper XML 位置 | 自定义 Mapper 配置 |
+| wbw.framework.mybatis.type-aliases-package | com.wbw.**.entity | 实体类包路径 | 简化类型别名配置 |
 
-**2. 实现服务提供者**
-```java
-import org.apache.dubbo.config.annotation.DubboService;
+#### 3.1.5 缓存模块配置
 
-@DubboService(interfaceClass = UserService.class, version = "1.0.0", group = "wbw")
-public class UserServiceImpl implements UserService {
-    @Override
-    public String getUserById(Long id) {
-        return "User{id=" + id + ", name=\"test_user\", age=25}";
-    }
+| 配置项 | 默认值 | 说明 | 使用场景 |
+|-------|-------|------|----------|
+| wbw.framework.redis.enabled | true | 是否启用 Redis | 控制缓存功能 |
+| wbw.framework.redis.host | localhost | Redis 主机地址 | Redis 连接配置 |
+| wbw.framework.redis.port | 6379 | Redis 端口 | Redis 连接配置 |
+| wbw.framework.redis.password | "" | Redis 密码 | Redis 安全配置 |
+| wbw.framework.redis.database | 0 | Redis 数据库索引 | 多数据库隔离 |
 
-    @Override
-    public Boolean createUser(String userInfo) {
-        return true;
-    }
-}
-```
+#### 3.1.6 服务治理配置
 
-**3. 引用服务消费者**
-```java
-import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.stereotype.Component;
+| 配置项 | 默认值 | 说明 | 使用场景 |
+|-------|-------|------|----------|
+| wbw.framework.nacos.enabled | true | 是否启用 Nacos | 控制服务治理功能 |
+| wbw.framework.nacos.server-addr | localhost:8848 | Nacos 服务地址 | 服务注册与发现 |
+| wbw.framework.nacos.namespace | public | Nacos 命名空间 | 多环境隔离 |
+| wbw.framework.nacos.group | DEFAULT_GROUP | Nacos 分组 | 服务分组管理 |
 
-@Component
-public class UserServiceConsumer {
-    @DubboReference(
-            interfaceClass = UserService.class,
-            version = "1.0.0",
-            group = "wbw",
-            check = false,
-            timeout = 5000,
-            retries = 1
-    )
-    private UserService userService;
+#### 3.1.7 消息模块配置
 
-    public String getUserInfo(Long id) {
-        return userService.getUserById(id);
-    }
-}
-```
+| 配置项 | 默认值 | 说明 | 使用场景 |
+|-------|-------|------|----------|
+| wbw.framework.rocketmq.enabled | true | 是否启用 RocketMQ | 控制消息队列功能 |
+| wbw.framework.rocketmq.name-server | localhost:9876 | RocketMQ 名称服务器 | 消息生产和消费 |
+| wbw.framework.rocketmq.producer-group | ${spring.application.name}-producer | 生产者组 | 消息生产者标识 |
 
-### 6.3 wbw-mybatis MyBatis数据访问模块
+#### 3.1.8 RPC 模块配置
 
-#### 6.3.1 安装步骤
+| 配置项 | 默认值 | 说明 | 使用场景 |
+|-------|-------|------|----------|
+| wbw.framework.dubbo.enabled | true | 是否启用 Dubbo | 控制 RPC 功能 |
+| wbw.framework.dubbo.application-name | ${spring.application.name} | 应用名称 | Dubbo 服务标识 |
+| wbw.framework.dubbo.registry-address | nacos://localhost:8848 | 注册中心地址 | 服务注册与发现 |
 
-在项目的 `pom.xml` 文件中添加依赖：
-```xml
-<dependency>
-    <groupId>com.wbw</groupId>
-    <artifactId>wbw-mybatis</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
+### 3.2 推荐最简配置方案
 
-#### 6.3.2 配置文件
-
-在 `application.yml` 文件中添加数据源配置：
+#### 3.2.1 基础配置示例
 ```yaml
 spring:
-  datasource:
-    primary:
-      url: jdbc:mysql://localhost:3306/primary_db
-      username: root
-      password: root
-    secondary:
-      url: jdbc:mysql://localhost:3306/secondary_db
-      username: root
-      password: root
+  application:
+    name: demo-service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+
+wbw:
+  framework:
+    security:
+      jwt-secret: your-secret-key-here
 ```
 
-#### 6.3.3 使用示例
+#### 3.2.2 生产环境配置示例
+```yaml
+spring:
+  application:
+    name: demo-service
+  profiles:
+    active: prod
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos-server:8848
+      config:
+        server-addr: nacos-server:8848
 
-**1. 动态数据源切换**
-```java
-import com.wbw.mybatis.annotation.DataSource;
-
-@Service
-public class UserService {
-    @Autowired
-    private UserMapper userMapper;
-
-    // 使用主数据源
-    public User getPrimaryUser(Long id) {
-        return userMapper.selectById(id);
-    }
-
-    // 使用从数据源
-    @DataSource("secondary")
-    public User getSecondaryUser(Long id) {
-        return userMapper.selectById(id);
-    }
-}
+wbw:
+  framework:
+    security:
+      jwt-secret: ${JWT_SECRET}
+      token-expiration: 7200000
+    redis:
+      host: redis-server
+      password: ${REDIS_PASSWORD}
+    rocketmq:
+      name-server: rocketmq-server:9876
 ```
 
-**2. 自定义Mapper**
-```java
-import com.wbw.mybatis.mapper.BaseMapperX;
+### 3.3 配置管理最佳实践
 
-public interface UserMapper extends BaseMapperX<User> {
-    // 继承了BaseMapperX的所有方法
-    // 可以添加自定义方法
-}
+1. **敏感配置加密**：生产环境中的敏感配置（如密码、密钥）应使用环境变量或配置中心加密
+2. **环境隔离**：使用不同的配置文件区分开发、测试、生产环境
+3. **配置版本控制**：将配置文件纳入版本控制系统
+4. **配置验证**：启动时验证配置的合法性和完整性
+5. **动态配置**：使用 Nacos 等配置中心实现配置的动态更新
+
+## 4. 微服务项目集成指南
+
+### 4.1 框架安装
+
+#### 4.1.1 安装命令
+```bash
+# 在微服务项目的根目录执行
+mvn dependency:copy -Dartifact=com.wbw:wbw-starter:1.0.0:jar -DoutputDirectory=lib
 ```
 
-### 6.4 wbw-nacos Nacos服务发现与配置模块
+#### 4.1.2 详细步骤
 
-#### 6.4.1 安装步骤
+1. **添加依赖**：在微服务项目的 `pom.xml` 中添加框架依赖
+2. **配置环境**：设置必要的环境变量
+3. **初始化配置**：创建基础配置文件
+4. **启动服务**：验证服务是否正常启动
 
-在项目的 `pom.xml` 文件中添加依赖：
-```xml
-<dependency>
-    <groupId>com.wbw</groupId>
-    <artifactId>wbw-nacos</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
+### 4.2 微服务架构兼容配置
 
-#### 6.4.2 配置文件
-
-在 `application.yml` 文件中添加Nacos配置：
+#### 4.2.1 服务注册与发现
 ```yaml
 spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848
-        namespace: public
+        server-addr: ${NACOS_SERVER_ADDR}
+        namespace: ${NACOS_NAMESPACE}
+        group: ${SERVICE_GROUP}
+```
+
+#### 4.2.2 配置中心
+```yaml
+spring:
+  cloud:
+    nacos:
       config:
-        server-addr: localhost:8848
-        namespace: public
+        server-addr: ${NACOS_SERVER_ADDR}
+        namespace: ${NACOS_NAMESPACE}
+        group: ${CONFIG_GROUP}
         file-extension: yaml
 ```
 
-#### 6.4.3 使用示例
-
-**1. 服务注册与发现**
-```java
-import com.wbw.nacos.service.NacosDiscoveryService;
-
-@Service
-public class DiscoveryService {
-    @Autowired
-    private NacosDiscoveryService nacosDiscoveryService;
-
-    // 注册服务
-    public void registerService() {
-        nacosDiscoveryService.registerService();
-    }
-
-    // 发现服务
-    public List<String> discoverServices() {
-        return nacosDiscoveryService.discoverServices("service-name");
-    }
-}
-```
-
-**2. 配置中心**
-```java
-import com.wbw.nacos.service.NacosConfigService;
-
-@Service
-public class ConfigService {
-    @Autowired
-    private NacosConfigService nacosConfigService;
-
-    // 获取配置
-    public String getConfig(String dataId, String group) {
-        return nacosConfigService.getConfig(dataId, group);
-    }
-
-    // 监听配置变更
-    public void listenConfig(String dataId, String group) {
-        nacosConfigService.listenConfig(dataId, group, config -> {
-            System.out.println("配置变更: " + config);
-        });
-    }
-}
-```
-
-### 6.5 wbw-redis Redis缓存模块
-
-#### 6.5.1 安装步骤
-
-在项目的 `pom.xml` 文件中添加依赖：
-```xml
-<dependency>
-    <groupId>com.wbw</groupId>
-    <artifactId>wbw-redis</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-
-#### 6.5.2 配置文件
-
-在 `application.yml` 文件中添加Redis配置：
-```yaml
-spring:
-  redis:
-    host: localhost
-    port: 6379
-    password: 
-    database: 0
-```
-
-#### 6.5.3 使用示例
-
-**1. Redis服务使用**
-```java
-import com.wbw.redis.service.RedisService;
-
-@Service
-public class CacheService {
-    @Autowired
-    private RedisService redisService;
-
-    // 设置缓存
-    public void setCache(String key, Object value, long timeout) {
-        redisService.set(key, value, timeout);
-    }
-
-    // 获取缓存
-    public <T> T getCache(String key, Class<T> clazz) {
-        return redisService.get(key, clazz);
-    }
-
-    // 删除缓存
-    public void deleteCache(String key) {
-        redisService.delete(key);
-    }
-}
-```
-
-**2. Redis分布式锁**
-```java
-import com.wbw.redis.tool.RedisLock;
-
-@Service
-public class LockService {
-    @Autowired
-    private RedisLock redisLock;
-
-    // 使用分布式锁
-    public void doWithLock(String key, long expireTime, Runnable task) {
-        if (redisLock.lock(key, expireTime)) {
-            try {
-                task.run();
-            } finally {
-                redisLock.unlock(key);
-            }
-        }
-    }
-}
-```
-
-### 6.6 wbw-rocketmq RocketMQ消息队列模块
-
-#### 6.6.1 安装步骤
-
-在项目的 `pom.xml` 文件中添加依赖：
-```xml
-<dependency>
-    <groupId>com.wbw</groupId>
-    <artifactId>wbw-rocketmq</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-
-#### 6.6.2 配置文件
-
-在 `application.yml` 文件中添加RocketMQ配置：
-```yaml
-rocketmq:
-  name-server: localhost:9876
-  producer:
-    group: producer-group
-  consumer:
-    group: consumer-group
-```
-
-#### 6.6.3 使用示例
-
-**1. 消息发送**
-```java
-import com.wbw.rocketmq.producer.RocketMQProducerService;
-
-@Service
-public class MessageService {
-    @Autowired
-    private RocketMQProducerService rocketMQProducerService;
-
-    // 发送同步消息
-    public void sendSyncMessage(String topic, String tag, String message) {
-        rocketMQProducerService.sendSyncMessage(topic, tag, message);
-    }
-
-    // 发送异步消息
-    public void sendAsyncMessage(String topic, String tag, String message) {
-        rocketMQProducerService.sendAsyncMessage(topic, tag, message, (sendResult, e) -> {
-            if (e != null) {
-                System.err.println("发送失败: " + e.getMessage());
-            } else {
-                System.out.println("发送成功: " + sendResult);
-            }
-        });
-    }
-
-    // 发送延迟消息
-    public void sendDelayMessage(String topic, String tag, String message, int delayLevel) {
-        rocketMQProducerService.sendDelayMessage(topic, tag, message, delayLevel);
-    }
-}
-```
-
-**2. 消息消费**
-```java
-import com.wbw.rocketmq.consumer.RocketMQConsumerService;
-
-@Service
-public class ConsumerService {
-    @Autowired
-    private RocketMQConsumerService rocketMQConsumerService;
-
-    // 消费消息
-    public void consumeMessage(String topic, String tag) {
-        rocketMQConsumerService.subscribe(topic, tag, message -> {
-            System.out.println("收到消息: " + message);
-            return true; // 返回true表示消费成功
-        });
-    }
-}
-```
-
-### 6.7 wbw-security 安全认证模块
-
-#### 6.7.1 安装步骤
-
-在项目的 `pom.xml` 文件中添加依赖：
-```xml
-<dependency>
-    <groupId>com.wbw</groupId>
-    <artifactId>wbw-security</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-
-#### 6.7.2 配置文件
-
-在 `application.yml` 文件中添加JWT配置：
+#### 4.2.3 负载均衡
 ```yaml
 wbw:
-  security:
-    jwt:
-      secret: your-secret-key
-      expire: 3600
-      refresh-expire: 7200
+  framework:
+    dubbo:
+      cluster: failover
+      retries: 2
+      loadbalance: random
 ```
 
-#### 6.7.3 使用示例
-
-**1. 生成Token**
-```java
-import com.wbw.security.service.JwtTokenService;
-import com.wbw.security.model.TokenRequest;
-
-@Service
-public class AuthService {
-    @Autowired
-    private JwtTokenService jwtTokenService;
-
-    // 生成Token
-    public String generateToken(String username, String password) {
-        TokenRequest request = new TokenRequest();
-        request.setUsername(username);
-        request.setPassword(password);
-        return jwtTokenService.generateToken(request);
-    }
-
-    // 验证Token
-    public boolean validateToken(String token) {
-        return jwtTokenService.validateToken(token);
-    }
-
-    // 刷新Token
-    public String refreshToken(String token) {
-        return jwtTokenService.refreshToken(token);
-    }
-}
-```
-
-**2. 注解使用**
-```java
-import com.wbw.security.annotation.JwtToken;
-
-@RestController
-@RequestMapping("/api")
-public class UserController {
-    // 需要认证的接口
-    @JwtToken
-    @GetMapping("/user")
-    public User getUser() {
-        // 从上下文获取用户信息
-        return JwtSecurityContext.getCurrentUser();
-    }
-
-    // 不需要认证的接口
-    @Anonymous
-    @PostMapping("/login")
-    public String login(String username, String password) {
-        // 登录逻辑
-        return authService.generateToken(username, password);
-    }
-}
-```
-
-### 6.8 wbw-web Web模块
-
-#### 6.8.1 安装步骤
-
-在项目的 `pom.xml` 文件中添加依赖：
-```xml
-<dependency>
-    <groupId>com.wbw</groupId>
-    <artifactId>wbw-web</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-
-#### 6.8.2 配置文件
-
-在 `application.yml` 文件中添加Web配置：
+#### 4.2.4 熔断降级
 ```yaml
-spring:
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-
-# OpenAPI配置
-springdoc:
-  api-docs:
-    path: /v3/api-docs
-  swagger-ui:
-    path: /swagger-ui.html
+resilience4j:
+  circuitbreaker:
+    instances:
+      default:
+        registerHealthIndicator: true
+        slidingWindowSize: 100
+        minimumNumberOfCalls: 10
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
 ```
 
-#### 6.8.3 使用示例
+### 4.3 常见集成问题及解决方案
 
-**1. 全局异常处理**
+#### 4.3.1 依赖冲突
 
-框架已集成全局异常处理器，会自动捕获并处理以下异常：
-- BusinessException
-- ServiceException
-- ValidationException
-- SystemException
-- TokenException
-- UserAuthenticationException
+**问题**：框架依赖与项目依赖版本冲突
 
-**2. 日志拦截**
+**解决方案**：
+- 使用 `mvn dependency:tree` 分析依赖树
+- 在 `pom.xml` 中通过 `<exclusions>` 排除冲突依赖
+- 确保使用统一的依赖版本管理
 
-框架已集成请求日志拦截器，会自动记录请求和响应信息。
+#### 4.3.2 配置覆盖
 
-**3. 验证器使用**
-```java
-import com.wbw.web.validator.Phone;
+**问题**：项目配置被框架默认配置覆盖
 
-public class UserDTO {
-    @Phone(message = "手机号格式错误")
-    private String phone;
+**解决方案**：
+- 了解配置优先级：命令行参数 > 环境变量 > 配置文件
+- 在项目配置文件中明确指定配置项
+- 检查配置文件加载顺序
 
-    // getter and setter
-}
+#### 4.3.3 服务启动失败
 
-@RestController
-@RequestMapping("/api")
-public class UserController {
-    @PostMapping("/user")
-    public Result createUser(@Valid @RequestBody UserDTO userDTO) {
-        // 处理逻辑
-        return Result.success("创建成功");
-    }
-}
-```
+**问题**：集成框架后服务无法正常启动
 
-## 7. 总结
+**解决方案**：
+- 检查日志中的错误信息
+- 验证依赖是否正确引入
+- 确认配置项是否合法
+- 检查端口是否被占用
 
-本项目是一个功能全面的企业级微服务框架，集成了多种主流中间件和工具，旨在简化企业级应用的开发、部署和管理过程。框架提供了清晰的模块划分和详细的使用说明，方便开发人员快速上手和使用。
+#### 4.3.4 性能问题
 
-通过本框架，开发人员可以专注于业务逻辑的实现，而无需关注底层技术细节，从而提高开发效率和系统稳定性。框架适用于构建大型、分布式的企业级应用，支持高并发场景和复杂业务系统的实现。
+**问题**：集成框架后服务性能下降
 
-## 8. 版本历史
+**解决方案**：
+- 检查自动配置是否全部必要
+- 优化缓存策略
+- 调整线程池配置
+- 监控系统资源使用情况
 
-- **1.0.0**：初始版本，包含所有核心模块的实现
+#### 4.3.5 安全问题
+
+**问题**：框架集成后存在安全隐患
+
+**解决方案**：
+- 定期更新框架版本
+- 配置适当的安全策略
+- 启用 HTTPS
+- 实现合理的认证授权机制
+
+## 5. 最佳实践
+
+### 5.1 微服务设计最佳实践
+
+1. **服务划分**：基于业务能力划分微服务，保持服务边界清晰
+2. **API 设计**：遵循 RESTful 设计规范，使用合适的 HTTP 方法和状态码
+3. **数据管理**：每个微服务使用独立的数据库，避免跨服务直接访问数据
+4. **异步通信**：使用消息队列实现服务间的异步通信
+5. **容错设计**：实现熔断、降级、重试等容错机制
+
+### 5.2 开发最佳实践
+
+1. **代码规范**：遵循 Java 代码规范，使用 Lombok 简化代码
+2. **测试覆盖**：编写单元测试和集成测试，确保代码质量
+3. **日志管理**：使用统一的日志格式，实现日志链路追踪
+4. **监控告警**：集成 Prometheus 和 Grafana，实现系统监控
+5. **CI/CD**：建立持续集成和持续部署流程
+
+### 5.3 部署最佳实践
+
+1. **容器化**：使用 Docker 容器化部署微服务
+2. **编排管理**：使用 Kubernetes 管理容器集群
+3. **环境一致性**：确保开发、测试、生产环境配置一致
+4. **滚动更新**：实现服务的滚动更新，减少 downtime
+5. **备份恢复**：定期备份数据，制定灾难恢复计划
+
+## 6. 故障排查指南
+
+### 6.1 常见错误及解决方法
+
+#### 6.1.1 启动错误
+
+**错误信息**：`Failed to start bean 'webServerStartStop'`
+
+**可能原因**：
+- 端口被占用
+- 配置文件错误
+- 依赖缺失
+
+**解决方法**：
+- 检查端口使用情况：`netstat -ano | findstr :8080`
+- 验证配置文件格式和内容
+- 确保所有依赖正确引入
+
+#### 6.1.2 服务调用错误
+
+**错误信息**：`No provider available for service`
+
+**可能原因**：
+- 服务未注册到注册中心
+- 网络连接问题
+- 服务下线
+
+**解决方法**：
+- 检查服务是否正常注册
+- 验证网络连通性
+- 查看服务健康状态
+
+#### 6.1.3 数据库错误
+
+**错误信息**：`Could not get JDBC Connection`
+
+**可能原因**：
+- 数据库连接配置错误
+- 数据库服务不可用
+- 连接池耗尽
+
+**解决方法**：
+- 验证数据库连接配置
+- 检查数据库服务状态
+- 调整连接池参数
+
+#### 6.1.4 缓存错误
+
+**错误信息**：`Redis connection timed out`
+
+**可能原因**：
+- Redis 服务不可用
+- 网络连接问题
+- 缓存键过期策略不当
+
+**解决方法**：
+- 检查 Redis 服务状态
+- 验证网络连通性
+- 优化缓存策略
+
+### 6.2 日志分析
+
+1. **日志级别**：根据环境调整日志级别，生产环境建议使用 INFO 或 WARN
+2. **日志格式**：使用结构化日志格式，便于日志分析工具处理
+3. **日志聚合**：使用 ELK 或 Loki 等工具聚合分布式日志
+4. **日志查询**：通过 traceId 查询完整的请求链路
+
+### 6.3 性能分析
+
+1. **监控指标**：关注响应时间、吞吐量、错误率等关键指标
+2. **性能测试**：定期进行性能测试，建立性能基准
+3. **瓶颈定位**：使用 Arthas 等工具定位性能瓶颈
+4. **优化策略**：根据性能分析结果制定优化策略
+
+## 7. 版本管理
+
+### 7.1 版本号规则
+采用语义化版本号：`X.Y.Z`
+- **X**：主版本号，不兼容的 API 变更
+- **Y**：次版本号，向下兼容的功能新增
+- **Z**：修订版本号，向下兼容的问题修正
+
+### 7.2 版本发布流程
+1. **开发阶段**：`X.Y.Z-SNAPSHOT`
+2. **测试阶段**：`X.Y.Z-RC.N`
+3. **发布阶段**：`X.Y.Z`
+
+### 7.3 版本兼容性
+- 主版本号变更：可能不兼容
+- 次版本号变更：向下兼容
+- 修订版本号变更：完全兼容
+
+## 8. 贡献指南
+
+### 8.1 代码贡献
+1. **Fork 项目**：在 GitHub 上 Fork 项目到个人账号
+2. **创建分支**：基于 develop 分支创建功能分支
+3. **提交代码**：提交代码并编写测试
+4. **发起 PR**：向主仓库发起 Pull Request
+5. **代码审查**：等待维护者代码审查
+6. **合并代码**：审查通过后合并到主分支
+
+### 8.2 文档贡献
+1. **发现问题**：发现文档中的错误或遗漏
+2. **修改文档**：更新文档内容
+3. **提交 PR**：提交文档修改
+
+### 8.3 问题反馈
+1. **Bug 报告**：在 GitHub Issues 中提交 Bug 报告
+2. **功能请求**：提出新功能或改进建议
+3. **讨论交流**：参与项目讨论和技术交流
+
+## 9. 许可证
+
+本项目采用 Apache 2.0 许可证，详见 LICENSE 文件。
+
+## 10. 联系方式
+
+- **项目地址**：<项目 GitHub 地址>
+- **文档地址**：<项目文档地址>
+- **邮件列表**：<邮件列表地址>
+- **Issue 追踪**：<Issue 地址>
 
 ---
 
-以上是项目的全面介绍和使用说明，希望对开发人员有所帮助。如有任何问题，请参考各模块的详细文档或联系项目维护人员。
+**© 2026 WBW Team. All rights reserved.**

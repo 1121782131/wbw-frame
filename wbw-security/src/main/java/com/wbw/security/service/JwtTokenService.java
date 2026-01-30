@@ -50,4 +50,19 @@ public interface JwtTokenService {
      * 获取Token过期时间
      */
     Long getTokenExpiration(String token);
+    
+    /**
+     * 将Token加入黑名单
+     */
+    void addTokenToBlacklist(String token);
+    
+    /**
+     * 检查Token是否在黑名单中
+     */
+    boolean isTokenInBlacklist(String token);
+    
+    /**
+     * 从黑名单中移除Token
+     */
+    void removeTokenFromBlacklist(String token);
 }

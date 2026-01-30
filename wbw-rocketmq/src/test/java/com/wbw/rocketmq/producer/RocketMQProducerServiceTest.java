@@ -106,7 +106,7 @@ public class RocketMQProducerServiceTest {
         when(rocketMQTemplate.syncSend(eq(topic), eq(message), eq(timeoutMillis))).thenReturn(expectedResult);
 
         // 执行测试
-        SendResult actualResult = rocketMQProducerService.send(topic, message, timeout);
+        SendResult actualResult = rocketMQProducerService.sendWithTimeout(topic, message, timeout);
 
         // 验证结果
         assertNotNull(actualResult);

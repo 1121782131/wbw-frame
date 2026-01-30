@@ -1,0 +1,1 @@
+com.wbw:wbw-starter:jar:1.0.0
